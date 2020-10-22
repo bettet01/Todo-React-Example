@@ -3,8 +3,10 @@
 const defaultState = {
     loading: false,
     todos: [],
-    currentTodo: {},
+    currentTodo: undefined,
     errorMessage: "",
+    showModal: false,
+    updateState: false,
 }
 
 const TodoReducer = (state = defaultState, action) => {
@@ -27,6 +29,31 @@ const TodoReducer = (state = defaultState, action) => {
                 ...state,
                 loading: false,
                 errorMessage: action.payload,
+            }
+        case "ADD_TODO_SUCCESS":
+            return {
+                ...state,
+                todos: action.payload.todos,
+                showModal: false
+            }
+        case "SELECT_TODO":
+            return {
+                ...state,
+                currentTodo: action.payload
+            }
+        case "CHANGE_MODAL_STATE":
+            return {
+                ...state,
+                showModal: !state.showModal
+            }
+        case "CHANGE_TODO_STATUS":
+            return {
+                ...state,
+                currentTodo: {
+                    ...state.currentTodo,
+                    status: action.payload.todo.status
+                },
+                todos: action.payload.todos
             }
         default:
             return state;
