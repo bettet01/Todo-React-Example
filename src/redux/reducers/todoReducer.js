@@ -55,6 +55,12 @@ const TodoReducer = (state = defaultState, action) => {
                 },
                 todos: action.payload.todos
             }
+        case "DELETE_TODO_SUCCESS":
+            return {
+                ...state,
+                todos: action.payload.todos,
+                currentTodo: undefined
+            }
         default:
             return state;
     }

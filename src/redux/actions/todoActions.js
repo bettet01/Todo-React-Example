@@ -41,6 +41,15 @@ export const selectTodo = (todo) => dispatch => {
     })
 }
 
+export const deleteTodo = (id) => dispatch => {
+    axios.delete(`http://localhost:3001/delete-todo/${id}`).then((res) => {
+        dispatch({
+            type: "DELETE_TODO_SUCCESS",
+            payload: res.data
+        })
+    })
+}
+
 export const changeStatus = (todo) =>  dispatch => {
     const changedStatus = {
         ...todo,
